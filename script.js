@@ -31,3 +31,4 @@ async function fetchAndDisplayJSON() {
 
 // Appeler la fonction pour récupérer et afficher le JSON
 fetchAndDisplayJSON();
+sdfrsqgfs
