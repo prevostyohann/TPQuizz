@@ -1,0 +1,122 @@
+{
+    "module": {
+      "number": 1,
+      "name": "Quizz",
+      "questions": 10,
+      "revision": "2024-10-23"
+    },
+    "questions": [
+      {
+        "number": 1,
+        "question": "Qu'étudie la sismologie ?",
+        "answers": [
+          "Le vin",
+          "Les tremblements de terre",
+          "Les volcans",
+          "Les molécules d'eau"
+        ],
+        "correct_answer": 1
+      },
+      {
+        "number": 2,
+        "question": "Comment s'appelle cette épice connue pour ses bienfaits ayurvédiques ?",
+        "answers": [
+          "Le pili-pili",
+          "Le paprika",
+          "La muscade",
+          "Le curcuma"
+        ],
+        "correct_answer": 3
+      },
+      {
+        "number": 3,
+        "question": "Selon un célèbre proverbe `Tous les chemins mènent à ...` ?",
+        "answers": [
+          "Bruxelles",
+          "Istanbul",
+          "Rome",
+          "Paris"
+        ],
+        "correct_answer": 2
+      },
+      {
+        "number": 4,
+        "question": "Que signifie le terme syncope ?",
+        "answers": [
+          "Perte d'un sein",
+          "Arrêt cardiaque momentané",
+          "Perte de connaissance",
+          "Perte de la vue"
+        ],
+        "correct_answer": 2
+      },
+      {
+        "number": 5,
+        "question": "Quelle famille de scientifiques célèbres possède le plus de prix Nobel ?",
+        "answers": [
+          "La famille Gide",
+          "La famille Curie",
+          "La famille Mauriac",
+          "La famille Grignard"
+        ],
+        "correct_answer": 1
+      },
+      {
+        "number": 6,
+        "question": "Dans quelle activité un mnémoniste excelle-t-il ?",
+        "answers": [
+          "La mémorisation",
+          "La compréhension musicale",
+          "Les mathématiques inversés",
+          "La magie"
+        ],
+        "correct_answer": 0
+      },
+      {
+        "number": 7,
+        "question": "Qu'est-ce qu'un suanpan ?",
+        "answers": [
+          "Un sabre japonais",
+          "Un objet qui sert à calculer",
+          "Une technique de massage",
+          "Un poisson consommé en Chine"
+        ],
+        "correct_answer": 1
+      },
+      {
+        "number": 8,
+        "question": "Qui est le Saint patron de l'Irlande ?",
+        "answers": [
+          "Saint-Patrick",
+          "Saint-Juste",
+          "Saint-Edouard",
+          "Saint-Magnus"
+        ],
+        "correct_answer": 0
+      },
+      {
+        "number": 9,
+        "question": "Dans quelle ville se situe le Colisée ?",
+        "answers": [
+          "À Thèbes",
+          "À Athènes",
+          "À Turin",
+          "À Rome"
+        ],
+        "correct_answer": 3
+      },
+      {
+        "number": 10,
+        "question": "Qu'est-ce que Naruto ?",
+        "answers": [
+          "Un manga japonais",
+          "Un soda créé pour les ados",
+          "Un insecte vivant au Japon",
+          "Une boisson alcoolisée servie dans les bars"
+        ],
+        "correct_answer": 0
+      }
+    ]
+  }
+
+  
