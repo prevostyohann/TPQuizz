@@ -23,24 +23,40 @@ async function fetchAndDisplayJSON() {
         jsonContent.innerHTML = '';
 
 // ETAPE 2 - Parcourir tous les éléments et les afficher
-        data.items.forEach((item, index) => {
-             // Créer un élément div pour chaque item
-             const itemDiv = document.createElement('div');
-             itemDiv.innerHTML = `<pre>${JSON.stringify(item, null, 2)}</pre>`;
+/*         data.items.forEach((item, index) => {
+ */      data.questions.forEach((question, index) => {
+            // Créer un élément div pour chaque item
+             /* const itemDiv = document.createElement('div');
+             itemDiv.innerHTML = `<pre>${JSON.stringify(item, null, 2)}</pre>`; */
+
+            // Créer un élément div pour chaque question
+                const questionDiv = document.createElement('div');
+                questionDiv.innerHTML = `
+                    <h3>Question ${question.number}: ${question.question}</h3>
+                    <ul>
+                        ${question.answers.map((answer, i) => `<li>${answer}</li>`).join('')}
+                    </ul>
+                `;
              
              // Ajouter une classe CSS
-             itemDiv.classList.add('highlight');
+/*              itemDiv.classList.add('highlight'); */
+                questionDiv.classList.add('highlight');
 
              // Ajouter un événement de clic
-            itemDiv.addEventListener('click', () => {
-                alert(`Élément ${index + 1} cliqué !`);
+                /* itemDiv.addEventListener('click', () => {
+                    alert(`Élément ${index + 1} cliqué !`);
+                }); */
+                questionDiv.addEventListener('click', () => {
+                    alert(`Question ${question.number} cliquée !`);
+                });
+
+                // Ajouter l'élément div au contenu JSON
+                /* jsonContent.appendChild(itemDiv);
+            }); */
+                jsonContent.appendChild(questionDiv);
             });
 
-            // Ajouter l'élément div au contenu JSON
-            jsonContent.appendChild(itemDiv);
-        });
-
-
+        // FIN ETAPE 2
         
         // Convertir l'objet JSON en chaîne de caractères et l'afficher sur la page - METTRE CETTE
         // LIGNE SI PAS ETAPE 2
