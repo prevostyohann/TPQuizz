@@ -182,18 +182,95 @@ async function fetchAndDisplayJSON() {
         // LIGNE SI PAS ETAPE 2
         //jsonContent.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
         
-        
+        // true ou false pour vérifier si la réponse donnée est la bonne
+        const createQuestion = ({ question, correct_answer, answers }, i) => {
+            const field = document.createElement('fieldset')
+            field.innerHTML = `<legend>Question ${i}</legend>
+              <p>${question}</p>
+              ${ options.map((option) => `<div>
+                <input type="radio" id="option-${option}" name="answer${i}" value="${option}"
+                       ${ option === answer ? 'checked' : '' }>
+                <label for="option-${option}">${option}</label>
+              </div>`).join('') }
+              `
+              
+              return field;
+          }
+          
+          const createQuizz = () => {
+            const form = document.getElementById('quizz')
+            const quizz = fetchQuizz()
+            const questions = Object.values(quizz)
+            
+            questions.forEach((question, i) => {
+              const field = createQuestion(question, i + 1)
+              form.appendChild(field)
+            })
+          }
+          
+          createQuizz()
         // Afficher le contenu JSON dans la console
         console.log(data);
     } catch (error) {
         // Gérer les erreurs
         console.error('Erreur:', error);
     }
+
 }
 
 // Appeler la fonction pour récupérer et afficher le JSON
 fetchAndDisplayJSON();
 
 
+
 //-----------------------------------------------------------------------------------
 
+
+
+
+
+
+
+
+
+
+/*  YOHANN
+
+function AjouterLigne()
+    {
+        if(!checkEmptyInput()){
+            let newRow = table.insertRow(table.length),
+            let table = document.getElementById("table"),
+                newRow = table.insertRow(table.length),
+                cell1 = newRow.insertCell(0)
+                cell2 = newRow.insertCell(1)
+                cell3 = newRow.insertCell(2)
+                cell4 = newRow.insertCell(3)
+                numebro = document.getElementById("numbero").value,
+                nom = document.getElementById("nom").value,
+                prenom = document.getElementById("prenom").value,
+                note = document.getElementById("note").value;
+    
+            cell1.innerHTML = numero;
+            cell2.innerHTML = nom;
+            cell3.innerHTML = prenom;
+            cell4.innerHTML = note;
+            SelectedRowToInput();
+        }
+    }
+
+    function SelectedRowToInput()
+    {
+        for(var i=1; i<table.rows.length; i++)
+        {
+            table.rows[i].onclick=function()
+        }
+    }
+
+
+ 
+var btn = document.createElement("BUTTON");        // Créer un élément <button>
+var t = document.createTextNode("CLICK ME");       // Créer un noeud textuel
+btn.appendChild(t);                                // Ajouter le texte au bouton
+document.body.appendChild(btn);                    // Ajoute la balise <button> à la balise <body>
+ */
