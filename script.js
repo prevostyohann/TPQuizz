@@ -183,6 +183,11 @@ async function fetchAndDisplayJSON() {
                             item.classList.add('incorrect'); // Mauvaise réponse
                         }
                     });
+                    const radioButtons = questionDiv.querySelectorAll(`input[name="question${question.number}"]`);
+                    radioButtons.forEach((radio) => {
+                        radio.disabled = true;
+                    });
+             
                 } else {
                     alert('Veuillez sélectionner une réponse !');
                 }
@@ -215,5 +220,33 @@ style.innerHTML = `
         background-color: red;
         color: white;
     }
+  
+    h3 {
+    font-size: 40px;
+    }
+  
+    div {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    }
+    
+    ul {
+    list-style-type: none;
+    }
+
+    li {
+    margin-left: 100px;
+    }
+
+    button {
+    margin-left: 150px;
+    }
+
+    h1 {
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 50px;
+}
 `;
+
 document.head.appendChild(style);
