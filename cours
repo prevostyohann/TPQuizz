@@ -1,0 +1,98 @@
+Fais moi un cours sur Json et sur comment l'utiliser avec JavaScript, html, css, et bootstrap
+ 
+Bien sûr ! Commençons par une introduction à JSON et comment l'utiliser avec JavaScript, HTML, CSS et Bootstrap.
+ 
+### Qu'est-ce que JSON ?
+ 
+**JSON** (JavaScript Object Notation) est un format léger d'échange de données. Il est facile à lire et à écrire pour les humains et simple à analyser et à générer pour les machines. JSON utilise une syntaxe de paires clé-valeur, similaire aux objets en JavaScript.
+ 
+**Exemple de JSON :**
+```json
+{
+  "nom": "Alice",
+  "age": 30,
+  "ville": "Paris"
+}
+```
+ 
+### Utiliser JSON avec JavaScript
+ 
+1. **Charger un fichier JSON :**
+   On peut utiliser `fetch` pour récupérer un fichier JSON.
+ 
+   ```javascript
+   fetch('data.json')
+     .then(response => response.json())
+     .then(data => {
+       console.log(data);
+     })
+     .catch(error => console.error('Erreur:', error));
+   ```
+ 
+2. **Manipuler les données JSON :**
+   Après avoir chargé les données, vous pouvez les utiliser comme des objets JavaScript.
+ 
+   ```javascript
+   fetch('data.json')
+     .then(response => response.json())
+     .then(data => {
+       document.getElementById('info').innerHTML = `Nom: ${data.nom}, Age: ${data.age}`;
+     });
+   ```
+ 
+### Intégration avec HTML
+ 
+Voici un exemple simple d'une page HTML qui utilise JSON.
+ 
+**HTML :**
+```html
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Exemple JSON</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Informations</h1>
+        <div id="info" class="alert alert-info"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+```
+ 
+### CSS et Bootstrap
+ 
+Vous pouvez styliser votre page avec du CSS ou en utilisant les classes de Bootstrap pour un design responsive. Dans l'exemple ci-dessus, j'ai utilisé une classe Bootstrap pour un style d'alerte.
+ 
+### Exemple complet
+ 
+Voici l'exemple complet en utilisant un fichier JSON, un script JavaScript, et une structure HTML :
+ 
+1. **data.json :**
+   ```json
+   {
+     "nom": "Alice",
+     "age": 30,
+     "ville": "Paris"
+   }
+   ```
+ 
+2. **script.js :**
+   ```javascript
+   fetch('data.json')
+     .then(response => response.json())
+     .then(data => {
+       document.getElementById('info').innerHTML = `Nom: ${data.nom}, Age: ${data.age}, Ville: ${data.ville}`;
+     })
+     .catch(error => console.error('Erreur:', error));
+   ```
+ 
+3. **index.html :** (comme montré ci-dessus)
+ 
+### Conclusion
+ 
+JSON est un outil puissant pour l'échange de données. Avec JavaScript, il est facile de récupérer et d'afficher ces données sur une page web. L'utilisation de Bootstrap facilite le style et la mise en page.
