@@ -17,9 +17,51 @@ async function fetchAndDisplayJSON() {
         
         // Sélectionner l'élément HTML où afficher le contenu
         const jsonContent = document.getElementById('jsonContent');
+
+
+// ETAPE 2 - Vider le contenu précédent
+        jsonContent.innerHTML = '';
+
+// ETAPE 2 - Parcourir tous les éléments et les afficher
+/*         data.items.forEach((item, index) => {
+ */      data.questions.forEach((question, index) => {
+            // Créer un élément div pour chaque item
+             /* const itemDiv = document.createElement('div');
+             itemDiv.innerHTML = `<pre>${JSON.stringify(item, null, 2)}</pre>`; */
+
+            // Créer un élément div pour chaque question
+                const questionDiv = document.createElement('div');
+                questionDiv.innerHTML = `
+                    <h3>Question ${question.number}: ${question.question}</h3>
+                    <ul>
+                        ${question.answers.map((answer, i) => `<li>${answer}</li>`).join('')}
+                    </ul>
+                `;
+             
+             // Ajouter une classe CSS
+/*              itemDiv.classList.add('highlight'); */
+                questionDiv.classList.add('highlight');
+
+             // Ajouter un événement de clic
+                /* itemDiv.addEventListener('click', () => {
+                    alert(`Élément ${index + 1} cliqué !`);
+                }); */
+                questionDiv.addEventListener('click', () => {
+                    alert(`Question ${question.number} cliquée !`);
+                });
+
+                // Ajouter l'élément div au contenu JSON
+                /* jsonContent.appendChild(itemDiv);
+            }); */
+                jsonContent.appendChild(questionDiv);
+            });
+
+        // FIN ETAPE 2
         
-        // Convertir l'objet JSON en chaîne de caractères et l'afficher sur la page
-        jsonContent.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+        // Convertir l'objet JSON en chaîne de caractères et l'afficher sur la page - METTRE CETTE
+        // LIGNE SI PAS ETAPE 2
+        //jsonContent.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+        
         
         // Afficher le contenu JSON dans la console
         console.log(data);
@@ -222,6 +264,7 @@ async function fetchAndDisplayJSON() {
 fetchAndDisplayJSON();
 
 
+ Dev
 
 //-----------------------------------------------------------------------------------
 
@@ -274,3 +317,7 @@ var t = document.createTextNode("CLICK ME");       // Créer un noeud textuel
 btn.appendChild(t);                                // Ajouter le texte au bouton
 document.body.appendChild(btn);                    // Ajoute la balise <button> à la balise <body>
  */
+=======
+//-----------------------------------------------------------------------------------
+
+Laureline
