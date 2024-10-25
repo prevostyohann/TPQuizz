@@ -1,183 +1,83 @@
-
-/* /* // Chemin vers votre fichier JSON
-const jsonFile = 'index.json';
-
-// Fonction asynchrone pour récupérer et afficher le contenu JSON
-async function fetchAndDisplayJSON() {
-    try {
-        // Récupérer la réponse
-        const response = await fetch(jsonFile);
-        
-        // Vérifier si la réponse est correcte
-        if (!response.ok) {
-            throw new Error(`Erreur HTTP ! statut : ${response.status}`);
-        }
-
-        // Convertir la réponse en JSON
-        const data = await response.json();
-        
-        // Sélectionner l'élément HTML où afficher le contenu
-        const jsonContent = document.getElementById('jsonContent');
-        
-        // Convertir l'objet JSON en chaîne de caractères et l'afficher sur la page
-        jsonContent.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
-        
-        // Afficher le contenu JSON dans la console
-        console.log(data);
-    } catch (error) {
-        // Gérer les erreurs
-        console.error('Erreur:', error);
-    }
-}
-
-
-// méthode fetch pour isoler des elements json
-
-fetch('index.json')
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.json();
-  })
-  .then(data => {
-    // Accéder à la question en tant qu'objet
-    const question = data.questions[0].question;
-    console.log(question.text); // "Qu'étudie la sismologie ?"
-    
-    // Si tu veux ajouter des détails à l'objet question
-    question.details = {
-      type: 'multiple choice'
-    };
-
-    console.log(question); // Affiche l'objet question mis à jour
-  })
-  .catch(error => {
-    console.error('There was a problem with the fetch operation:', error);
-  });
-  */
-  
-
-  // méthode modifié avec un seul fetch : 
-
-  // Chemin vers votre fichier JSON
-/* const jsonFile = 'index.json';
-
-// Fonction asynchrone pour récupérer et afficher le contenu JSON
-async function fetchAndDisplayJSON() {
-    try {
-        // Récupérer la réponse
-        const response = await fetch(jsonFile);
-        
-        // Vérifier si la réponse est correcte
-        if (!response.ok) {
-            throw new Error(`Erreur HTTP ! statut : ${response.status}`);
-        }
-
-        // Convertir la réponse en JSON
-        const data = await response.json();
-        
-        // Sélectionner l'élément HTML où afficher le contenu
-        const jsonContent = document.getElementById('jsonContent');
-        
-        // Convertir l'objet JSON en chaîne de caractères et l'afficher sur la page
-        // jsonContent.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
-        
-        // Accéder à la question en tant qu'objet
-        
-        let question = data.questions[0].question;
-        for (let i = 0; i< data.questions.length; i++) {
-          question = data.questions[i].question;
-          console.log(question);
-        }
-
-        const cssQuestion = document.getElementById('questionCss');
-        cssQuestion.innerText = question.text;
-        jsonContent.appendChild(cssQuestion);
-
-    
-
-        const questSuivante = question[1];
-        console.log(question.text); // Affiche la question
-
-        // Ajouter des détails à l'objet question
-        question.details = {
-            type: 'multiple choice'
-        };
-
-        
-
-        console.log(question); // Affiche l'objet question mis à jour
-    } catch (error) {
-        // Gérer les erreurs
-        console.error('Erreur:', error);
-    }
-}
-
-
-// Appeler la fonction pour récupérer et afficher le JSON
-fetchAndDisplayJSON();
-  */
-
 // Chemin vers votre fichier JSON
 const jsonFile = 'index.json';
 
 // Fonction asynchrone pour récupérer et afficher le contenu JSON
 async function fetchAndDisplayJSON() {
     try {
-        // Récupérer la réponse
         const response = await fetch(jsonFile);
-        
-        // Vérifier si la réponse est correcte
         if (!response.ok) {
             throw new Error(`Erreur HTTP ! statut : ${response.status}`);
         }
 
-        // Convertir la réponse en JSON
         const data = await response.json();
-        
-        // Sélectionner l'élément HTML où afficher le contenu
         const jsonContent = document.getElementById('jsonContent');
 
-
-// ETAPE 2 - Vider le contenu précédent
+        // Vider le contenu précédent
         jsonContent.innerHTML = '';
 
-// ETAPE 2 - Parcourir tous les éléments et les afficher
-/*         data.items.forEach((item, index) => {
- */      data.questions.forEach((question, index) => {
-            // Créer un élément div pour chaque item
-             /* const itemDiv = document.createElement('div');
-             itemDiv.innerHTML = `<pre>${JSON.stringify(item, null, 2)}</pre>`; */
+        // Parcourir chaque question dans le JSON
+        data.questions.forEach((question) => {
+            // Créer un conteneur pour chaque question
+            const questionDiv = document.createElement('div');
+            questionDiv.classList.add('card', 'mx-5', 'container-fluid', 'border-primary', 'mb-3');
 
-            // Créer un élément div pour chaque question
-                const questionDiv = document.createElement('div');
-                questionDiv.classList.add('card','mx-5', 'container-fluid', 'border-primary', 'mb-3', 'g-0');
-                
-                questionDiv.innerHTML = `
-                <h3>Question ${question.number}: ${question.question}</h3>
-                <ul>
-                    ${question.answers.map((answer, index) => `
-                        <li>
-                            <input type="radio" name="question${question.number}" id="q${question.number}a${index}" value="${index}">
-                            <label for="q${question.number}a${index}">${answer}</label>
-                        </li>
-                    `).join('')}
-                </ul>
-            `;
-            questionDiv.classList.add('highlight');
+            const cardBody = document.createElement('div');
+            cardBody.classList.add('card-body');
 
-            // Ajouter un bouton pour soumettre la réponse
+            // Titre de la question
+            const cardTitle = document.createElement('h5');
+            cardTitle.classList.add('card-title');
+            cardTitle.textContent = `Question ${question.number}`;
+
+            // Texte de la question
+            const cardText = document.createElement('p');
+            cardText.classList.add('card-text');
+            cardText.textContent = question.question;
+
+            // Liste des réponses
+            const list = document.createElement('ul');
+            list.classList.add('list-group', 'list-group-flush');
+
+            question.answers.forEach((answer, index) => {
+                const listItem = document.createElement('li');
+                listItem.classList.add('list-group-item');
+
+                const radioInput = document.createElement('input');
+                radioInput.setAttribute('type', 'radio');
+                radioInput.setAttribute('name', `question${question.number}`);
+                radioInput.setAttribute('id', `q${question.number}a${index}`);
+                radioInput.setAttribute('value', index);
+                radioInput.classList.add('form-check-input');
+
+                const label = document.createElement('label');
+                label.setAttribute('for', `q${question.number}a${index}`);
+                label.classList.add('form-check-label');
+                label.textContent = answer;
+
+                // Ajouter l'input et le label au listItem
+                listItem.appendChild(radioInput);
+                listItem.appendChild(label);
+                // Ajouter le listItem à la liste
+                list.appendChild(listItem);
+            });
+
+            // Ajouter le titre, le texte et la liste au cardBody
+            cardBody.appendChild(cardTitle);
+            cardBody.appendChild(cardText);
+            cardBody.appendChild(list);
+
+            // Créer le bouton Soumettre
             const submitButton = document.createElement('button');
-            submitButton.innerText = 'Soumettre';
+            submitButton.classList.add('btn', 'btn-primary', 'mt-3');
+            submitButton.textContent = 'Soumettre';
+
+            // Ajouter l'événement de clic pour le bouton "Soumettre"
             submitButton.addEventListener('click', () => {
                 const selectedAnswer = document.querySelector(`input[name="question${question.number}"]:checked`);
                 if (selectedAnswer) {
                     const answerIndex = selectedAnswer.value;
-                    const isCorrect = answerIndex == question.correct_answer;
+                    const listItems = questionDiv.querySelectorAll('.list-group-item');
 
-                    // Modifier la couleur de la réponse
-                    const listItems = questionDiv.querySelectorAll('li');
                     listItems.forEach((item, index) => {
                         if (index == question.correct_answer) {
                             item.classList.add('correct'); // Bonne réponse
@@ -185,70 +85,31 @@ async function fetchAndDisplayJSON() {
                             item.classList.add('incorrect'); // Mauvaise réponse
                         }
                     });
+
+                    // Désactiver les boutons radio après soumission
                     const radioButtons = questionDiv.querySelectorAll(`input[name="question${question.number}"]`);
                     radioButtons.forEach((radio) => {
                         radio.disabled = true;
                     });
-             
                 } else {
                     alert('Veuillez sélectionner une réponse !');
                 }
             });
 
-            questionDiv.appendChild(submitButton);
+            // Ajouter le bouton au cardBody
+            cardBody.appendChild(submitButton);
+            // Ajouter le cardBody à la carte
+            questionDiv.appendChild(cardBody);
+            // Ajouter la carte au contenu principal
             jsonContent.appendChild(questionDiv);
         });
 
-        // Afficher le contenu JSON dans la console
-        console.log(data);
+        console.log(data); // Afficher les données dans la console pour débogage
     } catch (error) {
-        // Gérer les erreurs
         console.error('Erreur:', error);
-        jsonContent.innerHTML = `<p>Erreur de chargement : ${error.message}</p>`;
+        jsonContent.innerHTML = `<p class="text-danger">Erreur de chargement : ${error.message}</p>`;
     }
 }
 
 // Appeler la fonction pour récupérer et afficher le JSON
 fetchAndDisplayJSON();
-
-// Ajouter les styles CSS pour les réponses
-const style = document.createElement('style');
-style.innerHTML = `
-    .correct {
-        background-color: green;
-        color: white;
-    }
-    .incorrect {
-        background-color: red;
-        color: white;
-    }
-  
-    h3 {
-    font-size: 40px;
-    }
-  
-    div {
-    margin-top: 50px;
-    margin-bottom: 50px;
-    }
-    
-    ul {
-    list-style-type: none;
-    }
-
-    li {
-   
-    }
-
-    button {
-    margin-left: 150px;
-    }
-
-    h1 {
-    margin-bottom: 30px;
-    text-align: center;
-    font-size: 50px;
-}
-`;
-
-document.head.appendChild(style);
