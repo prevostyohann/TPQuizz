@@ -1,4 +1,4 @@
-let json = {
+/* let json = {
     "quiz": {
       "q1": {
         "question": "Which one is correct team name in NBA?",
@@ -41,8 +41,30 @@ let json = {
         "answer": "Pablo Picasso"
       }
     }
-  }
+  } */
   
+  async function fetchAndDisplayJSON() {
+    try {
+        // Récupérer la réponse
+        const response = await fetch();
+        
+        // Vérifier si la réponse est correcte
+        if (!response.ok) {
+            throw new Error(`Erreur HTTP ! statut : ${response.status}`);
+        }
+
+        // Convertir la réponse en JSON
+        const data = await response.json("/index.json");
+    }
+    catch(error){
+
+        console.log(error);
+    
+    }
+    }
+
+    fetchAndDisplayJSON();
+
   let quiz = document.getElementById("quiz");
 let keyList = Object.keys(json.quiz);
 for (let j = 0; j < keyList.length; j++) {
