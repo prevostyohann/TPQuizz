@@ -152,6 +152,7 @@ async function fetchAndDisplayJSON() {
 
             // Créer un élément div pour chaque question
                 const questionDiv = document.createElement('div');
+                questionDiv.classList.add('card','mx-5', 'container-fluid', 'border-primary', 'mb-3', 'g-0',);
                 questionDiv.innerHTML = `
                 <h3>Question ${question.number}: ${question.question}</h3>
                 <ul>
@@ -235,7 +236,7 @@ style.innerHTML = `
     }
 
     li {
-    margin-left: 100px;
+   
     }
 
     button {
