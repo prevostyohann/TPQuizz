@@ -1,4 +1,5 @@
-/* // Chemin vers votre fichier JSON
+
+/* /* // Chemin vers votre fichier JSON
 const jsonFile = 'index.json';
 
 // Fonction asynchrone pour récupérer et afficher le contenu JSON
@@ -152,72 +153,67 @@ async function fetchAndDisplayJSON() {
             // Créer un élément div pour chaque question
                 const questionDiv = document.createElement('div');
                 questionDiv.innerHTML = `
-                    <h3>Question ${question.number}: ${question.question}</h3>
-                    <ul>
-                        ${question.answers.map((answer, i) => `<li>${answer}</li>`).join('')}
-                    </ul>
-                `;
-             
-             // Ajouter une classe CSS
-/*              itemDiv.classList.add('highlight'); */
-                questionDiv.classList.add('highlight');
+                <h3>Question ${question.number}: ${question.question}</h3>
+                <ul>
+                    ${question.answers.map((answer, index) => `
+                        <li>
+                            <input type="radio" name="question${question.number}" id="q${question.number}a${index}" value="${index}">
+                            <label for="q${question.number}a${index}">${answer}</label>
+                        </li>
+                    `).join('')}
+                </ul>
+            `;
+            questionDiv.classList.add('highlight');
 
-             // Ajouter un événement de clic
-                /* itemDiv.addEventListener('click', () => {
-                    alert(`Élément ${index + 1} cliqué !`);
-                }); */
-                questionDiv.addEventListener('click', () => {
-                    alert(`Question ${question.number} cliquée !`);
-                });
+            // Ajouter un bouton pour soumettre la réponse
+            const submitButton = document.createElement('button');
+            submitButton.innerText = 'Soumettre';
+            submitButton.addEventListener('click', () => {
+                const selectedAnswer = document.querySelector(`input[name="question${question.number}"]:checked`);
+                if (selectedAnswer) {
+                    const answerIndex = selectedAnswer.value;
+                    const isCorrect = answerIndex == question.correct_answer;
 
-                // Ajouter l'élément div au contenu JSON
-                /* jsonContent.appendChild(itemDiv);
-            }); */
-                jsonContent.appendChild(questionDiv);
+                    // Modifier la couleur de la réponse
+                    const listItems = questionDiv.querySelectorAll('li');
+                    listItems.forEach((item, index) => {
+                        if (index == question.correct_answer) {
+                            item.classList.add('correct'); // Bonne réponse
+                        } else if (index == answerIndex) {
+                            item.classList.add('incorrect'); // Mauvaise réponse
+                        }
+                    });
+                } else {
+                    alert('Veuillez sélectionner une réponse !');
+                }
             });
 
-        // FIN ETAPE 2
-        
-        // Convertir l'objet JSON en chaîne de caractères et l'afficher sur la page - METTRE CETTE
-        // LIGNE SI PAS ETAPE 2
-        //jsonContent.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
-        
-        // true ou false pour vérifier si la réponse donnée est la bonne
-        const createQuestion = ({ question, correct_answer, answers }, i) => {
-            const field = document.createElement('fieldset')
-            field.innerHTML = `<legend>Question ${i}</legend>
-              <p>${question}</p>
-              ${ options.map((option) => `<div>
-                <input type="radio" id="option-${option}" name="answer${i}" value="${option}"
-                       ${ option === answer ? 'checked' : '' }>
-                <label for="option-${option}">${option}</label>
-              </div>`).join('') }
-              `
-              
-              return field;
-          }
-          
-          const createQuizz = () => {
-            const form = document.getElementById('quizz')
-            const quizz = fetchQuizz()
-            const questions = Object.values(quizz)
-            
-            questions.forEach((question, i) => {
-              const field = createQuestion(question, i + 1)
-              form.appendChild(field)
-            })
-          }
-          
-          createQuizz()
+            questionDiv.appendChild(submitButton);
+            jsonContent.appendChild(questionDiv);
+        });
+
         // Afficher le contenu JSON dans la console
         console.log(data);
     } catch (error) {
         // Gérer les erreurs
         console.error('Erreur:', error);
+        jsonContent.innerHTML = `<p>Erreur de chargement : ${error.message}</p>`;
     }
-
 }
 
 // Appeler la fonction pour récupérer et afficher le JSON
 fetchAndDisplayJSON();
 
+// Ajouter les styles CSS pour les réponses
+const style = document.createElement('style');
+style.innerHTML = `
+    .correct {
+        background-color: green;
+        color: white;
+    }
+    .incorrect {
+        background-color: red;
+        color: white;
+    }
+`;
+document.head.appendChild(style);
