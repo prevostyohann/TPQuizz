@@ -1,6 +1,9 @@
 // Chemin vers votre fichier JSON
 const jsonFile = 'index.json';
 
+// Variable pour compter les bonnes réponses
+let correctAnswersCount = 0;
+
 // Fonction asynchrone pour récupérer et afficher le contenu JSON
 async function fetchAndDisplayJSON() {
     try {
@@ -81,9 +84,12 @@ async function fetchAndDisplayJSON() {
                     listItems.forEach((item, index) => {
                         if (index == question.correct_answer) {
                             item.classList.add('correct'); // Bonne réponse
+                            if (index == answerIndex) {
+                                correctAnswersCount++; // Incrémenter le compteur de bonnes réponses
+                                updateCorrectAnswersCount(); // Mettre à jour l'affichage du compteur
+                            }
                         } else if (index == answerIndex) {
                             item.classList.add('incorrect'); // Mauvaise réponse
-    
                         }
                     });
 
@@ -97,13 +103,11 @@ async function fetchAndDisplayJSON() {
                 }
             });
 
-            //fond d'écran
-            document.body.style.backgroundImage = "url('./istockphoto-1316129143-1024x1024.jpg')";
-            document.body.style.backgroundSize = "cover"; // Pour couvrir toute la page
-            document.body.style.backgroundPosition = "center"; // Pour centrer l'image
-            document.body.style.backgroundRepeat = "no-repeat"; // Pour éviter la répétition de l'image
-
-
+        //fond d'écran
+        document.body.style.backgroundImage = "url('./istockphoto-1316129143-1024x1024.jpg')";
+        document.body.style.backgroundSize = "cover"; // Pour couvrir toute la page
+        document.body.style.backgroundPosition = "center"; // Pour centrer l'image
+        document.body.style.backgroundRepeat = "no-repeat"; // Pour éviter la répétition de l'image
 
             // Ajouter le bouton au cardBody
             cardBody.appendChild(submitButton);
@@ -113,6 +117,12 @@ async function fetchAndDisplayJSON() {
             jsonContent.appendChild(questionDiv);
         });
 
+        // Afficher le compteur de bonnes réponses
+        const counterDiv = document.createElement('div');
+        counterDiv.classList.add('counter', 'text-center', 'mt-3', 'color-white');
+        counterDiv.innerHTML = `<h4>Bonnes réponses : <span id="correctAnswersCount">0</span></h4>`;
+        jsonContent.appendChild(counterDiv);
+
         console.log(data); // Afficher les données dans la console pour débogage
     } catch (error) {
         console.error('Erreur:', error);
@@ -120,7 +130,11 @@ async function fetchAndDisplayJSON() {
     }
 }
 
-
+// Fonction pour mettre à jour l'affichage du compteur de bonnes réponses
+function updateCorrectAnswersCount() {
+    const counterSpan = document.getElementById('correctAnswersCount');
+    counterSpan.textContent = correctAnswersCount;
+}
 
 // Appeler la fonction pour récupérer et afficher le JSON
 fetchAndDisplayJSON();
