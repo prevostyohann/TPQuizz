@@ -71,6 +71,13 @@ async function fetchAndDisplayJSON() {
             submitButton.classList.add('btn', 'btn-primary', 'mt-3');
             submitButton.textContent = 'Soumettre';
 
+
+ // Laure           // Ajouter le score final
+            // Initialiser le score
+ const score = 0;
+
+
+
             // Ajouter l'événement de clic pour le bouton "Soumettre"
             submitButton.addEventListener('click', () => {
                 const selectedAnswer = document.querySelector(`input[name="question${question.number}"]:checked`);
