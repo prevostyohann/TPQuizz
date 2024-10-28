@@ -71,13 +71,6 @@ async function fetchAndDisplayJSON() {
             submitButton.classList.add('btn', 'btn-primary', 'mt-3');
             submitButton.textContent = 'Soumettre';
 
-
- // Laure           // Ajouter le score final
-            // Initialiser le score
- const score = 0;
-
-
-
             // Ajouter l'événement de clic pour le bouton "Soumettre"
             submitButton.addEventListener('click', () => {
                 const selectedAnswer = document.querySelector(`input[name="question${question.number}"]:checked`);
@@ -88,7 +81,6 @@ async function fetchAndDisplayJSON() {
                     listItems.forEach((item, index) => {
                         if (index == question.correct_answer) {
                             item.classList.add('correct'); // Bonne réponse
-                            //correct.style.backgroundColor = 'green';
                         } else if (index == answerIndex) {
                             item.classList.add('incorrect'); // Mauvaise réponse
     
