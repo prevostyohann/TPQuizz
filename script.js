@@ -9,6 +9,15 @@ function callApi() {
       /* Parcourir chaque question du tableau json */
       data.questions.forEach((question) => {
         /*  élément HTML pour chaque question */
+
+        const questionDiv = document.createElement("div");
+        questionDiv.classList.add(
+          "card",
+          "mx-5",
+          "container-fluid",
+          "border-primary",
+          "mb-3"
+        );
         const lesQuestions = document.createElement("p");
         lesQuestions.textContent = question.question;
         const lesReponses = document.createElement("ul");
