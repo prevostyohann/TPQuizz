@@ -81,8 +81,10 @@ async function fetchAndDisplayJSON() {
                     listItems.forEach((item, index) => {
                         if (index == question.correct_answer) {
                             item.classList.add('correct'); // Bonne réponse
+                            //correct.style.backgroundColor = 'green';
                         } else if (index == answerIndex) {
                             item.classList.add('incorrect'); // Mauvaise réponse
+    
                         }
                     });
 
@@ -95,6 +97,14 @@ async function fetchAndDisplayJSON() {
                     alert('Veuillez sélectionner une réponse !');
                 }
             });
+
+            //fond d'écran
+            document.body.style.backgroundImage = "url('./istockphoto-1316129143-1024x1024.jpg')";
+            document.body.style.backgroundSize = "cover"; // Pour couvrir toute la page
+            document.body.style.backgroundPosition = "center"; // Pour centrer l'image
+            document.body.style.backgroundRepeat = "no-repeat"; // Pour éviter la répétition de l'image
+
+
 
             // Ajouter le bouton au cardBody
             cardBody.appendChild(submitButton);
@@ -110,6 +120,8 @@ async function fetchAndDisplayJSON() {
         jsonContent.innerHTML = `<p class="text-danger">Erreur de chargement : ${error.message}</p>`;
     }
 }
+
+
 
 // Appeler la fonction pour récupérer et afficher le JSON
 fetchAndDisplayJSON();
