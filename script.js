@@ -81,7 +81,6 @@ async function fetchAndDisplayJSON() {
                     listItems.forEach((item, index) => {
                         if (index == question.correct_answer) {
                             item.classList.add('correct'); // Bonne réponse
-                            //correct.style.backgroundColor = 'green';
                         } else if (index == answerIndex) {
                             item.classList.add('incorrect'); // Mauvaise réponse
     
