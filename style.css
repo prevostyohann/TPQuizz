@@ -2,3 +2,39 @@
     margin: 0;
     padding: 0;
 }
+
+.incorrect {
+    background-color: rgb(255, 0, 0);
+    color: rgb(255, 255, 255);
+}
+.correct {
+    background-color: rgb(0, 255, 34);
+    color: rgb(255, 255, 255);
+}
+
+h3 {
+font-size: 40px;
+}
+
+div {
+margin-top: 50px;
+margin-bottom: 50px;
+}
+
+ul {
+list-style-type: none;
+}
+
+li {
+
+}
+
+button {
+margin-left: 150px;
+}
+
+h1 {
+margin-bottom: 30px;
+text-align: center;
+font-size: 50px;
+}
