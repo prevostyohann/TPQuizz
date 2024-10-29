@@ -43,12 +43,6 @@ async function fetchAndDisplayJSON() {
       const list = document.createElement("ul");
       list.classList.add("list-group", "list-group-flush");
  
-      /* let hasAnswered = false; // Pour contrôler si une réponse a été choisie
- 
-      question.answers.forEach((answer, index) => {
-        const listItem = document.createElement("li");
-        listItem.classList.add("list-group-item");
- */
 
 // Laure
 
@@ -68,7 +62,7 @@ async function fetchAndDisplayJSON() {
                     elementClique.style.backgroundColor = "green"; // Bonne réponse
                 } else {
                     elementClique.style.backgroundColor = "red"; // Mauvaise réponse
-                    //indexDelaBonneReponse.style.backgroundColor = "green"; // on peut selectionner tant que la bonne réponse n 'est pas trouvée, en suite clic impossible
+                    //indexDelaBonneReponse.style.backgroundColor = "green"; // on peut selectionner tant que la bonne réponse n 'est pas trouvée, ensuite clic impossible, dans ce cas là commenter la ligne en dessous
                     list.children[indexDelaBonneReponse].style.backgroundColor = "green"; // affichage de la bonne réponse en cas d'erreur
 
                 }
@@ -82,78 +76,9 @@ async function fetchAndDisplayJSON() {
         });
 
 
-
-
-
-
-
-/*         // fonction pour supprimer l'ombre de la sélection
-        function supprimerOmbreApresSelection () {
-            //listItem.classList.add("selected"); // Marquer la réponse sélectionnée
-            listItem.classList.remove("selected") // Retire la classe 
-        } 
-
-        function actionSurClic (event) {
-            miseAJourCouleursReponses(event);
-            supprimerOmbreApresSelection(event);
-        }
- */
-
-
-/*         // ecouteur du click
-        listItem.addEventListener("click", actionSurClic , { once: true });
- */  
-
-
-
-
-
-
 // Fin Laure ---------------------------------
-
-
-
-
-/*             listItem.classList.add("selected"); // Marquer la réponse sélectionnée
- */ 
-/*             // Désactiver les clics sur toutes les réponses après une sélection
-            list.querySelectorAll(".list-group-item").forEach((li) => {
-              li.style.pointerEvents = "none"; // Désactive le clic
-            });
- */          
-
-
  
-/*         listItem.addEventListener("click", () => {
-          if (!hasAnswered) {
-            hasAnswered = true; // Marquer comme répondu
- */ 
-            // Mettre à jour les couleurs des réponses
-/*             question.answers.forEach((_, i) => {
-              const item = list.children[i];
-              if (i === question.correct_answer) {
-                item.classList.add("correct"); // Bonne réponse
-              } else {
-                item.classList.add("incorrect"); // Mauvaise réponse
-              }
-            });
- */ 
-/*             listItem.classList.add("selected"); // Marquer la réponse sélectionnée
- 
-            // Désactiver les clics sur toutes les réponses après une sélection
-            list.querySelectorAll(".list-group-item").forEach((li) => {
-              li.style.pointerEvents = "none"; // Désactive le clic
-            });
-          }
-        });
- */ 
-/*         listItem.textContent = answer; // Ajouter le texte de la réponse
-        list.appendChild(listItem); // Ajouter l'élément de liste à la liste});
- 
-        list.appendChild(listItem);
-      });
- 
- */      // Ajouter le titre, le texte et la liste au cardBody
+       // Ajouter le titre, le texte et la liste au cardBody
       cardBody.appendChild(cardTitle);
       cardBody.appendChild(cardText);
       cardBody.appendChild(list);
@@ -180,16 +105,5 @@ async function fetchAndDisplayJSON() {
 // Appeler la fonction pour récupérer et afficher le JSON
 fetchAndDisplayJSON();
  
-/* 
 
  
-dans le code que je t'ai envoyé
- 
-il faut faire une variable
- 
-qui est fausse quand l'utilisateur n'a pas cliqué
- 
-et qui devient vraie quand il a cliqué
- 
-pour qu'il ne puisse plus selectionner de reponse quand il en a select une
-  */
