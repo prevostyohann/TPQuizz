@@ -68,7 +68,7 @@ async function fetchAndDisplayJSON() {
                     elementClique.style.backgroundColor = "green"; // Bonne réponse
                 } else {
                     elementClique.style.backgroundColor = "red"; // Mauvaise réponse
-                    indexDelaBonneReponse.style.backgroundColor = "green"; // affichage de la bonne réponse
+                    indexDelaBonneReponse.style.backgroundColor = "green"; // on peut selectionner tant que la bonne réponse n 'est pas trouvée, en suite clic impossible
                 }
             // Désactivation des clics sur toutes les réponses après la sélection d'une réponse
                 Array.from(list.children).forEach((li) => {
