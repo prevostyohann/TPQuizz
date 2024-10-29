@@ -28,11 +28,12 @@ async function fetchAndDisplayJSON() {
 
          // Fonction pour afficher le score final
     function ResultatDuScore() {
-        console.log("Questions répondues: " + nbDeQuestionsRepondues);
-        console.log("Total de questions: " + data.questions.length);
-        // Vérifie si toutes les questions ont été répondues
+        // Vérifier si toutes les questions ont été répondues
         if (nbDeQuestionsRepondues === data.questions.length) {
-          // Affiche le score final
+            // Vider le contenu des questions pour afficher à la place le score
+            jsonContent.innerHTML = ""; 
+
+          // Afficher le score final
           const affichageScore = document.createElement('p');
           affichageScore.classList.add('list-group-item');
           affichageScore.textContent = `Vous avez eu ${nbDeBonnesReponses} bonnes réponses et ${nbDeMauvaisesReponses} erreurs sur ${data.questions.length} questions`;
