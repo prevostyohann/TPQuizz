@@ -4,11 +4,11 @@
 }
 
 .incorrect {
-    background-color: rgb(255, 0, 0);
+    background-color: rgb(204, 22, 22);
     color: rgb(255, 255, 255);
 }
 .correct {
-    background-color: rgb(0, 255, 34);
+    background-color: rgb(36, 161, 53);
     color: rgb(255, 255, 255);
 }
 
@@ -37,4 +37,19 @@ h1 {
 margin-bottom: 30px;
 text-align: center;
 font-size: 50px;
+}
+
+.list-group-item:hover {
+    background-color: rgba(0, 123, 255, 0.1); /* Couleur de fond au survol */
+    transform: scale(1.05); /* Agrandir légèrement */
+    transition: all 0.2s ease; /* Transition douce */
+}
+
+li {
+    padding: 10px; /* Ajoute du remplissage */
+    cursor: pointer; /* Indique que c'est cliquable */
+}
+
+.selected {
+    background-color: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
