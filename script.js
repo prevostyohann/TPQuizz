@@ -1,45 +1,81 @@
-// @ts-nocheck
-function callApi() {
-  const url = "index.json";
-  fetch(url)
-    .then((resp) => resp.json())
-    .then((data) => {
-      const affichage = document.getElementById("result");
+const jsonFile = "index.json";
 
-      /* Parcourir chaque question du tableau json */
-      data.questions.forEach((question) => {
-        /*  élément HTML pour chaque question */
+// Fonction asynchrone pour récupérer et afficher le contenu JSON
+async function fetchAndDisplayJSON() {
+  try {
+    const response = await fetch(jsonFile);
+    if (!response.ok) {
+      throw new Error(`Erreur HTTP ! statut : ${response.status}`);
+    }
+    const data = await response.json();
+    const jsonContent = document.getElementById("jsonContent");
+    // Vider le contenu précédent
+    jsonContent.innerHTML = "";
 
-        const questionDiv = document.createElement("div");
-        questionDiv.classList.add(
-          "card",
-          "mx-5",
-          "container-fluid",
-          "border-primary",
-          "mb-3"
-        );
-        const lesQuestions = document.createElement("p");
-        lesQuestions.textContent = question.question;
-        const lesReponses = document.createElement("ul");
+    // Parcourir chaque question dans le JSON
+    data.questions.forEach((question) => {
+      // Créer un conteneur pour chaque question
+      const questionDiv = document.createElement("div");
+      questionDiv.classList.add(
+        "card",
+        "mx-5",
+        "container-fluid",
+        "border-primary",
+        "mb-3"
+      );
 
-        question.answers.forEach((answer) => {
-          const answerItem = document.createElement("li");
-          answerItem.textContent = answer;
-          lesReponses.appendChild(answerItem);
+      const cardBody = document.createElement("div");
+      cardBody.classList.add("card-body");
+
+      // Titre de la question
+      const cardTitle = document.createElement("h5");
+      cardTitle.classList.add("card-title");
+      cardTitle.textContent = `Question ${question.number}`;
+
+      // Texte de la question
+      const cardText = document.createElement("p");
+      cardText.classList.add("card-text");
+      cardText.textContent = question.question;
+
+      // Liste des réponses
+      const list = document.createElement("ul");
+      list.classList.add("list-group", "list-group-flush");
+
+      // Pour contrôler si une réponse a été choisie
+      question.answers.forEach((answer, index) => {
+        const listItem = document.createElement("li");
+        listItem.classList.add("list-group-item");
+
+        listItem.addEventListener("click", () => {
+          // Désactiver les clics sur toutes les réponses après une sélection
+          list.querySelectorAll(".list-group-item").forEach((li) => {
+            li.style.pointerEvents = "none";
+          });
+          // Vérifier si la réponse est correcte
+          if (index === question.correct_answer) {
+            listItem.classList.add("correct"); // Bonne réponse
+          } else {
+            listItem.classList.add("incorrect"); // Mauvaise réponse
+          }
         });
-
-        // @ts-ignore
-        affichage.appendChild(lesQuestions);
-        affichage.appendChild(lesReponses);
+        listItem.textContent = answer; // Ajouter le texte de la réponse
+        list.appendChild(listItem); // Ajouter l'élément de liste à la liste
       });
-      document.querySelectorAll;
-    })
-    .catch((error) => {
-      console.error("Erreur lors du chargement des données:", error);
+      // Ajouter le titre, le texte et la liste au cardBody
+      cardBody.appendChild(cardTitle);
+      cardBody.appendChild(cardText);
+      cardBody.appendChild(list);
+      // Ajouter le cardBody à la carte
+      questionDiv.appendChild(cardBody);
+      // Ajouter la carte au contenu principal
+      jsonContent.appendChild(questionDiv);
     });
+    console.log(data); // Afficher les données dans la console pour débogage
+  } catch (error) {
+    console.error("Erreur:", error);
+    jsonContent.innerHTML = `<p class="text-danger">Erreur de chargement : ${error.message}</p>`;
+  }
 }
 
-callApi();
-document.addEventListener("DOMContentLoaded", function () {
-  callApi();
-});
+// Appeler la fonction pour récupérer et afficher le JSON
+fetchAndDisplayJSON();
