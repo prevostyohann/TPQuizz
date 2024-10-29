@@ -39,6 +39,8 @@ async function fetchAndDisplayJSON() {
     function ResultatDuScore() {
         // Vérifier si toutes les questions ont été répondues
         if (nbDeQuestionsRepondues === data.questions.length) {
+            // creation de l'élément audio
+            const rireSadique = new Audio('evil-laugh-89423.mp3');
             // bouton spécial Yannick
           //bouton
           const boutonScoreRepYannick = document.createElement('button');
@@ -50,6 +52,8 @@ async function fetchAndDisplayJSON() {
           document.body.appendChild(boutonScoreRepYannick);
           // rattacher au clic pour voir message
           boutonScoreRepYannick.addEventListener('click', () => {
+            // Jouer le son
+            rireSadique.play();
             // Vider le contenu des questions pour afficher à la place le score
                 jsonContent.innerHTML = ""; 
                 // intégration réponse
