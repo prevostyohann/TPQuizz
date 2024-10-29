@@ -4,11 +4,11 @@
 }
  
 .incorrect {
-    background-color: rgb(204, 22, 22);
+    background-color: rgb(244, 77, 77);
     color: rgb(255, 255, 255);
 }
 .correct {
-    background-color: rgb(36, 161, 53);
+    background-color: rgb(142, 237, 155);
     color: rgb(255, 255, 255);
 }
  

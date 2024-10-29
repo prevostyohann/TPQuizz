@@ -13,6 +13,38 @@ async function fetchAndDisplayJSON() {
  
     // Vider le contenu précédent
     jsonContent.innerHTML = "";
+
+
+// Laure 1
+
+        // Déclaration des variables pour les calculs en dehors de forEach pour éviter la réinitialisation des variables :
+
+
+        // Déclaration des variables pour le compeur
+        // initialissation compteur à zéro
+        let nbDeBonnesReponses = 0;
+        let nbDeMauvaisesReponses = 0;
+        let nbDeQuestionsRepondues = 0;
+
+         // Fonction pour afficher le score final
+    function ResultatDuScore() {
+        console.log("Questions répondues: " + nbDeQuestionsRepondues);
+        console.log("Total de questions: " + data.questions.length);
+        // Vérifie si toutes les questions ont été répondues
+        if (nbDeQuestionsRepondues === data.questions.length) {
+          // Affiche le score final
+          const affichageScore = document.createElement('p');
+          affichageScore.classList.add('list-group-item');
+          affichageScore.textContent = `Vous avez eu ${nbDeBonnesReponses} bonnes réponses et ${nbDeMauvaisesReponses} erreurs sur ${data.questions.length} questions`;
+  
+          // Ajoute l'affichage du score à la fin du contenu
+          document.body.appendChild(affichageScore);
+        }
+      }
+
+
+// Fin Laure 1
+
  
     // Parcourir chaque question dans le JSON
     data.questions.forEach((question) => {
@@ -44,36 +76,55 @@ async function fetchAndDisplayJSON() {
       list.classList.add("list-group", "list-group-flush");
  
 
-// Laure
+// Laure 2
+
+        // Déclaration des variables pour les calculs :
+
 
         // Déclaration de l'index de la bonne réponse
         const indexDelaBonneReponse = question.correct_answer;
+
+
+//...............................     
+
 
         // Créer les réponses et gérer les clics
         question.answers.forEach((answer, index) => {
             const listItem = document.createElement("li");
             listItem.classList.add("list-group-item");
             listItem.textContent = answer;
-            // Ajout de l'événement avec { once: true } pour empêcher les multiples clics
+            // Ajout de l'écouteur avec { once: true } pour empêcher les multiples clics
             listItem.addEventListener("click", (event) => {
                 const elementClique = event.target; // pas obligatoire mais c'est plus clair
                 // Mettre à jour les couleurs des réponses en fonction de la bonne ou mauvaise réponse
                 if (index === indexDelaBonneReponse) {
-                    elementClique.style.backgroundColor = "green"; // Bonne réponse
+                    //noter elementClique.style.backgroundColor = "green"; OU ALORS :
+                    elementClique.style.backgroundColor = "rgb(142, 237, 155)"; // Bonne réponse
+                    nbDeBonnesReponses ++;   // ajout 1 aux bonnes réponses
+                    console.log("nb bonnes rep " +nbDeBonnesReponses);
                 } else {
-                    elementClique.style.backgroundColor = "red"; // Mauvaise réponse
-                    //indexDelaBonneReponse.style.backgroundColor = "green"; // on peut selectionner tant que la bonne réponse n 'est pas trouvée, ensuite clic impossible, dans ce cas là commenter la ligne en dessous
-                    list.children[indexDelaBonneReponse].style.backgroundColor = "green"; // affichage de la bonne réponse en cas d'erreur
-
+                    //noter elementClique.style.backgroundColor = "red"; OU ALORS :
+                    elementClique.style.backgroundColor = "rgb(244, 77, 77)"; // Mauvaise réponse
+                    //indexDelaBonneReponse.style.backgroundColor = "green"; // on peut selectionner tant que la bonne réponse n 'est pas trouvée, ensuite clic impossible, dans ce cas là commenter la ligne en dessous mais le xompteur sera alors à modifier
+                    list.children[indexDelaBonneReponse].style.backgroundColor = "rgb(142, 237, 155)"; // affichage de la bonne réponse en cas d'erreur
+                    nbDeMauvaisesReponses ++;    // ajout 1 aux mauvaises réponses
+                    console.log("nbmauvrep" + nbDeMauvaisesReponses);
                 }
+                nbDeQuestionsRepondues ++;   // ajout 1 aux nombres de questions répondues
+                console.log("totrep" + nbDeQuestionsRepondues);
+                
+
             // Désactivation des clics sur toutes les réponses après la sélection d'une réponse
                 Array.from(list.children).forEach((li) => {
                 li.style.pointerEvents = "none"; // Désactiver le clic pour tous les éléments
                 });
+            // Affiche le score si toutes les questions sont répondues
+                ResultatDuScore();
             }, { once: true }); // Une seule sélection par réponse
                 
             list.appendChild(listItem);
         });
+
 
 
 // Fin Laure ---------------------------------
