@@ -102,17 +102,14 @@ async function fetchAndDisplayJSON() {
                     //noter elementClique.style.backgroundColor = "green"; OU ALORS :
                     elementClique.style.backgroundColor = "rgb(142, 237, 155)"; // Bonne réponse
                     nbDeBonnesReponses ++;   // ajout 1 aux bonnes réponses
-                    console.log("nb bonnes rep " +nbDeBonnesReponses);
                 } else {
                     //noter elementClique.style.backgroundColor = "red"; OU ALORS :
                     elementClique.style.backgroundColor = "rgb(244, 77, 77)"; // Mauvaise réponse
                     //indexDelaBonneReponse.style.backgroundColor = "green"; // on peut selectionner tant que la bonne réponse n 'est pas trouvée, ensuite clic impossible, dans ce cas là commenter la ligne en dessous mais le xompteur sera alors à modifier
                     list.children[indexDelaBonneReponse].style.backgroundColor = "rgb(142, 237, 155)"; // affichage de la bonne réponse en cas d'erreur
                     nbDeMauvaisesReponses ++;    // ajout 1 aux mauvaises réponses
-                    console.log("nbmauvrep" + nbDeMauvaisesReponses);
                 }
                 nbDeQuestionsRepondues ++;   // ajout 1 aux nombres de questions répondues
-                console.log("totrep" + nbDeQuestionsRepondues);
                 
 
             // Désactivation des clics sur toutes les réponses après la sélection d'une réponse
