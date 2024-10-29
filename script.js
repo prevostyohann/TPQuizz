@@ -1,4 +1,28 @@
 const jsonFile = "index.json";
+
+// Début du jeu
+//Création élément image
+const imageDebutJeu = document.createElement('img');
+imageDebutJeu.src = 'istockphoto-1316129143-1024x1024.jpg';
+imageDebutJeu.alt = 'Image du jeu du Quiz'; 
+//imageDebutJeu.style.width = '300px'; // Définir la largeur de l'image
+//imageDebutJeu.style.height = 'auto'; // Définir la hauteur automatique pour conserver les proportions
+document.body.appendChild(imageDebutJeu);
+
+//bouton pour commencer le quiz
+//bouton
+const boutonDemarrer = document.createElement('button');
+boutonDemarrer.textContent = 'Commencer le Quiz';
+boutonDemarrer.classList.add("btn", "btn-primary", "mt-3");
+//affichage du bouton recommencer
+document.body.appendChild(boutonDemarrer);
+// rattacher au clic pour démarrer
+boutonDemarrer.addEventListener('click', () => {
+    fetchAndDisplayJSON(); // Appel de la fonction pour démarrer le quiz
+});
+
+
+
  
 // Fonction asynchrone pour récupérer et afficher le contenu JSON
 async function fetchAndDisplayJSON() {
@@ -14,6 +38,10 @@ async function fetchAndDisplayJSON() {
     // Vider le contenu précédent
     jsonContent.innerHTML = "";
 
+    // Masquer l'image de départ et le bouton du début du jeu
+    imageDebutJeu.style.display = 'none';
+    boutonDemarrer.style.display = 'none';
+
     const quizz = document.createElement('h1');
     quizz.classList.add('h1');
     quizz.textContent = 'Quiz';
@@ -22,9 +50,6 @@ async function fetchAndDisplayJSON() {
     // Mais utiliser : prepend qui garantit que ça apparaît en haut de l’élément jsonContent, avant tout autre contenu ajouté par la suite.
     jsonContent.prepend(quizz);
 
-
-
-// Laure 1
 
         // Déclaration des variables pour les calculs en dehors de forEach pour éviter la réinitialisation des variables :
 
@@ -68,94 +93,50 @@ async function fetchAndDisplayJSON() {
                 reponseYannick.innerHTML = "DÉMERDEZ VOUS !!! <br><br>Vous n'aviez qu'à retenir vos bonnes réponses !"; // Affiche Message Yannick
                 // Masquer le bouton après le clic
                 boutonScoreRepYannick.style.display = 'none';
-
-                //bouton pour afficher le score normal
-                //bouton
-                const boutonAfficherscorenormal = document.createElement('button');
-                boutonAfficherscorenormal.innerHTML = 'Si vous y tenez <br> Votre score est ici';
-                //texte pour réponse  - Afficher le score final
-                const affichageScore = document.createElement('p');
-                affichageScore.classList.add('scintillant'); // Ajout de la classe scintillante
-                affichageScore.innerHTML = `Vous avez eu ${nbDeBonnesReponses} bonnes réponses et ${nbDeMauvaisesReponses} erreurs sur ${data.questions.length} questions <br><br>`;
-                // affichage du bouton score normal
-                document.body.appendChild(boutonAfficherscorenormal);
-                //document.body.appendChild(affichageScore);
-                // rattacher au clic pour voir message
-                boutonAfficherscorenormal.addEventListener('click', () => {
-                // Vider le contenu des questions pour afficher à la place le score
-                    jsonContent.innerHTML = ""; 
-                    // Masquer reponseYannick qui reste affichée au début
-                    reponseYannick.style.display = 'none';
-                    // intégration réponse
-                    document.body.appendChild(affichageScore);
-                    // afficher le réponse
-                    affichageScore; // Affiche le score normal
-                    // Masquer le bouton après le clic
-                    boutonAfficherscorenormal.style.display = 'none';
-
-                    //bouton pour recommecer
+                // ajout d'un timer pour afficher la suite au bout de 5 sec car le son dure 3sec
+                setTimeout(function() {
+                    //bouton pour afficher le score normal
                     //bouton
-                    const boutonRejouer = document.createElement('button');
-                    boutonRejouer.textContent = 'Recommencer le Quiz';
-                    //affichage du bouton recommencer
-                    document.body.appendChild(boutonRejouer);
-                    // rattacher au clic pour recommencer
-                    boutonRejouer.addEventListener('click', () => {
-                        fetchAndDisplayJSON(); // Rappel de la fonction pour recommencer le quiz
+                    const boutonAfficherscorenormal = document.createElement('button');
+                    boutonAfficherscorenormal.innerHTML = 'Si vous y tenez <br> Votre score est ici';
+                    //texte pour réponse  - Afficher le score final
+                    const affichageScore = document.createElement('p');
+                    affichageScore.classList.add('scintillant'); // Ajout de la classe scintillante
+                    affichageScore.innerHTML = `Vous avez eu ${nbDeBonnesReponses} bonnes réponses et ${nbDeMauvaisesReponses} erreurs sur ${data.questions.length} questions <br><br>`;
+                    // affichage du bouton score normal
+                    document.body.appendChild(boutonAfficherscorenormal);
+                    //document.body.appendChild(affichageScore);
+                    // rattacher au clic pour voir message
+                    boutonAfficherscorenormal.addEventListener('click', () => {
+                    // Vider le contenu des questions pour afficher à la place le score
+                        jsonContent.innerHTML = ""; 
+                        // Masquer reponseYannick qui reste affichée au début
+                        reponseYannick.style.display = 'none';
+                        // intégration réponse
+                        document.body.appendChild(affichageScore);
+                        // afficher le réponse
+                        affichageScore; // Affiche le score normal
+                        // Masquer le bouton après le clic
+                        boutonAfficherscorenormal.style.display = 'none';
+
+                        //bouton pour recommecer
+                        //bouton
+                        const boutonRejouer = document.createElement('button');
+                        boutonRejouer.textContent = 'Recommencer le Quiz';
+                        //affichage du bouton recommencer
+                        document.body.appendChild(boutonRejouer);
+                        // rattacher au clic pour recommencer
+                        boutonRejouer.addEventListener('click', () => {
+                            fetchAndDisplayJSON(); // Rappel de la fonction pour recommencer le quiz
+                        });
                     });
-                });
+                }, 5000);
           });
-
-
-
-
-/*             // Vider le contenu des questions pour afficher à la place le score
-            jsonContent.innerHTML = ""; 
- */
-/*           // Afficher le score final
-          const affichageScore = document.createElement('p');
-          affichageScore.classList.add('list-group-item');
-          affichageScore.classList.add('scintillant'); // Ajout de la classe scintillante
-          affichageScore.textContent = `Vous avez eu ${nbDeBonnesReponses} bonnes réponses et ${nbDeMauvaisesReponses} erreurs sur ${data.questions.length} questions`;
- */
-
-          /* event.target.textContent
-          const elementClique = event.target;
- */
-
-          // Création des boutons et actions s'y référent
-
-
-
-
-/*         const boutonRecommencer = document.createElement('button');
-        boutonRecommencer.textContent = 'Recommencer le Quiz';
-        boutonRecommencer.addEventListener('click', () => {
-            fetchAndDisplayJSON(); // Rappel de la fonction pour recommencer le quiz
-        });
- */
-/*         const boutonAfficherscorenormal = document.createElement('button');
-        boutonAfficherscorenormal.textContent = 'Votre score est ici';
-        boutonRecommencer.addEventListener('click', () => {
-            affichageScore; // Affiche le score normal
-        });
- */
-
-
-
-  
-          // Ajoute l'affichage du score et des boutons
-          //document.body.appendChild(affichageScore);
-          //document.body.appendChild(boutonRecommencer);
-/*           document.body.appendChild(boutonScoreRepYannick)
- */          //document.body.appendChild(boutonAfficherscorenormal)
         }
       }
 
-
-// Fin Laure 1
-
  
+
     // Parcourir chaque question dans le JSON
     data.questions.forEach((question) => {
       // Créer un conteneur pour chaque question
@@ -186,7 +167,6 @@ async function fetchAndDisplayJSON() {
       list.classList.add("list-group", "list-group-flush");
  
 
-// Laure 2
 
         // Déclaration des variables pour les calculs :
 
@@ -194,8 +174,6 @@ async function fetchAndDisplayJSON() {
         // Déclaration de l'index de la bonne réponse
         const indexDelaBonneReponse = question.correct_answer;
 
-
-//...............................     
 
 
         // Créer les réponses et gérer les clics
@@ -233,19 +211,12 @@ async function fetchAndDisplayJSON() {
         });
 
 
-
-// Fin Laure ---------------------------------
  
        // Ajouter le titre, le texte et la liste au cardBody
       cardBody.appendChild(cardTitle);
       cardBody.appendChild(cardText);
       cardBody.appendChild(list);
  
-/*       // Créer le bouton Soumettre
-      const submitButton = document.createElement("button");
-      submitButton.classList.add("btn", "btn-primary", "mt-3");
-      submitButton.textContent = "Soumettre";
- */ 
      
       // Ajouter le cardBody à la carte
       questionDiv.appendChild(cardBody);
@@ -261,7 +232,7 @@ async function fetchAndDisplayJSON() {
 }
  
 // Appeler la fonction pour récupérer et afficher le JSON
-fetchAndDisplayJSON();
+//fetchAndDisplayJSON();
  
 
  
