@@ -1,16 +1,17 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
  
-.incorrect {
+/* .incorrect {
     background-color: rgb(244, 77, 77);
     color: rgb(255, 255, 255);
 }
 .correct {
     background-color: rgb(142, 237, 155);
     color: rgb(255, 255, 255);
-}
+} */
  
 h3 {
 font-size: 40px;
@@ -27,10 +28,6 @@ list-style-type: none;
  
 li {
  
-}
- 
-button {
-margin-left: 150px;
 }
  
 h1 {
@@ -53,4 +50,38 @@ li {
 .selected {
     background-color: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
- 
+
+button {
+    position: absolute;
+        right:50px;
+    margin : '5px';
+    margin-left: 20px;
+    padding : '10px';
+    cursor : 'pointer';
+    height: 100px;
+    width: 200px;
+    font-size: x-large;
+    border: solid 5px rgb(72, 72, 214);
+}
+
+
+
+/* Pour faire scintiller : */
+@keyframes scintillate {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.scintillant {
+    animation: scintillate 1s infinite;
+    color: gold; /* Couleur de l'étoile */
+    font-size: 80px; /* Taille de la police */
+    font-weight: bold; /* Épaisseur de la police */
+    text-align: center;
+}
+
+
