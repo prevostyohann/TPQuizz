@@ -1,16 +1,17 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
-.incorrect {
-  background-color: rgb(255, 0, 0);
-  color: white;
+/* .incorrect {
+  background-color: rgb(244, 77, 77);
+  color: rgb(255, 255, 255);
 }
 .correct {
-  background-color: rgb(0, 255, 34);
-  color: white;
-}
+  background-color: rgb(142, 237, 155);
+  color: rgb(255, 255, 255);
+} */
 
 h3 {
   font-size: 40px;
@@ -25,8 +26,7 @@ ul {
   list-style-type: none;
 }
 
-button {
-  margin-left: 150px;
+li {
 }
 
 h1 {
@@ -34,13 +34,50 @@ h1 {
   text-align: center;
   font-size: 50px;
 }
-body {
-  background-color: pink;
-}
+
 .list-group-item:hover {
+  background-color: rgba(0, 123, 255, 0.1); /* Couleur de fond au survol */
   transform: scale(1.05); /* Agrandir légèrement */
-  transition: all 0.1s ease; /* Transition douce */
+  transition: all 0.2s ease; /* Transition douce */
 }
+
+li {
+  padding: 10px; /* Ajoute du remplissage */
+  cursor: pointer; /* Indique que c'est cliquable */
+}
+
 .selected {
-  font-weight: bold;
+  background-color: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+
+button {
+  position: absolute;
+  right: 50px;
+  margin: "5px";
+  margin-left: 20px;
+  padding: "10px";
+  cursor: "pointer";
+  height: 100px;
+  width: 200px;
+  font-size: x-large;
+  border: solid 5px rgb(72, 72, 214);
+}
+
+/* Pour faire scintiller : */
+@keyframes scintillate {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.scintillant {
+  animation: scintillate 1s infinite;
+  color: gold; /* Couleur de l'étoile */
+  font-size: 80px; /* Taille de la police */
+  font-weight: bold; /* Épaisseur de la police */
+  text-align: center;
 }
